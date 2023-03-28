@@ -1,0 +1,52 @@
+{
+    "Response": {
+        "responseMintedTimestamp": "2023-03-28T11:24:23.774Z",
+        "secondaryComponentsMintedTimestamp": "2023-03-28T11:24:23.774Z",
+        "profileCommendations": {
+            "data": {
+                "totalScore": 2540,
+                "commendationNodePercentagesByHash": {
+                    "1062358355": 410,
+                    "154475713": 76,
+                    "4180748446": 64,
+                    "1341823550": 33,
+                    "1390663518": 123
+                },
+                "scoreDetailValues": [
+                    474,
+                    415
+                ],
+                "commendationNodeScoresByHash": {
+                    "1062358355": 1703,
+                    "154475713": 314,
+                    "4180748446": 267,
+                    "1341823550": 137,
+                    "1390663518": 511
+                },
+                "commendationScoresByHash": {
+                    "3377580220": 55,
+                    "2019871317": 39,
+                    "354527503": 8,
+                    "3575743922": 25,
+                    "3872064891": 46,
+                    "3970150545": 26,
+                    "3037314846": 36,
+                    "4209356036": 45,
+                    "3030493827": 42,
+                    "2205006002": 39,
+                    "363818544": 9,
+                    "2506835299": 12,
+                    "965562884": 0,
+                    "801121776": 0,
+                    "3513056018": 33
+                }
+            },
+            "privacy": 2
+        }
+    },
+    "ErrorCode": 1,
+    "ThrottleSeconds": 0,
+    "ErrorStatus": "Success",
+    "Message": "Ok",
+    "MessageData": {}
+}
