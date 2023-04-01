@@ -1,11 +1,11 @@
-import { CommendationsComponentResponse } from "./controllers/types/bungieNetApiTypes";
+import { CommendationsComponentResponse } from "../types/bungieNetApiTypes.js";
 import { 
   CommendationCategoryMap, 
   CommendationSummary, 
   ProfileActivitiesWeight, 
   defaultWeight, 
   CommendationCategory, 
-  Commendation } from "./controllers/types/customTypes";
+  Commendation } from "../types/customTypes.js";
 
 const commendationCategories: CommendationCategoryMap[] = [
     {
@@ -102,6 +102,5 @@ function mapCommendationsResponse(input: CommendationsComponentResponse): Commen
     return summary;
 }
   
-
 export { mapCommendationsResponse, getPlayerCommendationsCardInText };
     

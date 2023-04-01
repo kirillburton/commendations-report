@@ -1,7 +1,7 @@
 // src/server/controllers/openAIApiController.ts
 // controller for getting generated summary from сhatgpt api
 import { Configuration, OpenAIApi } from "openai";
-import { generatePrompt } from "./utils/promptGenerator";
+import { generatePrompt } from "./utils/promptGenerator.js";
 
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
 

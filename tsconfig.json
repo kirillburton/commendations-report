@@ -1,11 +1,38 @@
 {
     "compilerOptions": {
-        "target": "ES2019",
-        "module": "CommonJS",
-        "strict": true,
+        "target": "es2020",
+        "module": "es2020",
+        "moduleResolution": "node16",
         "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "baseUrl": "./",
+        "paths": {
+          "*": [
+              "node_modules/*",
+              "src/types/*"
+          ]
+        },
+        "outDir": "dist",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "sourceMap": true,
+        "declaration": false,
+        "inlineSources": true,
+        "importHelpers": true,
+        "strict": true,
         "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "skipLibCheck": true
     },
-    "include": ["src"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

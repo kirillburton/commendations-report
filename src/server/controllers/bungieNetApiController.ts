@@ -1,7 +1,7 @@
 // src/server/controllers/bungieNetApiController.ts
 import axios from "axios";
-import { ApiResponse, SearchPlayerResponse, CommendationsComponentResponse } from "./types/bungieNetApiTypes";
-import { PlayerNamesAndMembership } from './types/customTypes';
+import { ApiResponse, SearchPlayerResponse, CommendationsComponentResponse } from "../../types/bungieNetApiTypes.js";
+import { PlayerNamesAndMembership } from '../../types/customTypes.js';
 
 const BUNGIE_API_KEY = process.env.BUNGIE_API_KEY || "";
 const baseUrl = "https://www.bungie.net/Platform";
@@ -51,7 +51,7 @@ async function getPlayerNamesAndMembershipByBungieName(bungieName: string): Prom
 }
   
 async function getCommendationsByMembershipId(playerProfile: PlayerNamesAndMembership): Promise<CommendationsComponentResponse> {
-    const { membershipType, membershipId, bungieGlobalDisplayName, bungieName } = playerProfile;
+    const { membershipType, membershipId } = playerProfile;
     const commendationComponentNumber = 1400;
     const url = `${baseUrl}/Destiny2/${membershipType}/Profile/${membershipId}/?components=${commendationComponentNumber}`;
   

@@ -2,22 +2,37 @@
   "name": "commendations-report",
   "version": "0.1.0",
   "description": "Tool for understanding a Guardian's preferences and experiences in Destiny 2 at a glance",
-  "main": "index.js",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "test": "ts-node src/run.ts",
-    "getProfile": "ts-node src/server/getProfile.ts"
+    "getProfile": "ts-node src/server/getProfile.ts",
+    "build": "tsc && npm run copy-css && npm run copy-html",
+    "copy-css": "cpy 'src/**/*.css' dist/ --parents",
+    "copy-html": "cpy 'src/**/*.html' dist/ --parents",
+    "watch": "tsc --watch",
+    "start": "node dist/server/server.js"
   },
   "author": "kirillburton",
   "license": "ISC",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
+    "@types/koa": "^2.13.6",
+    "@types/koa-bodyparser": "^4.3.10",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
+    "cpy-cli": "^4.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
   "dependencies": {
     "axios": "^1.3.4",
     "dotenv": "^16.0.3",
-    "openai": "^3.1.0"
+    "koa": "^2.14.1",
+    "koa-bodyparser": "^4.4.0",
+    "koa-router": "^12.0.0",
+    "koa-static": "^5.0.0",
+    "openai": "^3.1.0",
+    "tslib": "^2.5.0"
   }
 }

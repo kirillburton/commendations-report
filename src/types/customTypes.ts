@@ -67,3 +67,8 @@ export type ProfileActivitiesWeight = {
     endgamePve: number;
     raidsAndDungeons: number;
 }
+
+export type Temp = {
+    playerProfile: PlayerNamesAndMembership;
+    commendationSummary: CommendationSummary;
+}
