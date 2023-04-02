@@ -18,10 +18,12 @@ h1 {
 }
   
 input {
-    font-size: 1rem;
-    padding: 0.5rem;
+    font-family: 'Neue Haas Grotesk Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-size: medium;
+    font-weight: 100;
+    padding: 10px;
     width: 100%;
-    max-width: 400px;
+    max-width: 800px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -30,4 +32,14 @@ input:focus {
     outline: none;
     border-color: #999;
 }
-  
+
+.footer {
+    margin: 20px;
+    color: gray;
+    font-size: smaller;
+    margin-top: 50%;
+    align-items: flex-end;
+    width: auto;
+    position: absolute;
+    bottom: 0;
+}

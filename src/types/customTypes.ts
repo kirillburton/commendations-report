@@ -68,7 +68,7 @@ export type ProfileActivitiesWeight = {
     raidsAndDungeons: number;
 }
 
-export type Temp = {
-    playerProfile: PlayerNamesAndMembership;
+export type PlayerDataForChatGPT = {
+    name: string;
     commendationSummary: CommendationSummary;
 }

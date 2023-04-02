@@ -1,6 +1,4 @@
-// This file will be responsible for handling user input and making requests to the Koa server.
-// todo: add event listeners to capture user input from index.html. 
-// Once the input is captured, make API requests to your Koa server, which in turn will fetch data from the external APIs.
+// This file is responsible for handling user input and making search requests to the Koa server.
 
 import { PlayerNamesAndMembership } from "../../types/customTypes.js";
 
@@ -11,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('keydown', (event: KeyboardEvent) => {
         if (event.key === 'Enter') {
             event.preventDefault(); 
+            searchInput.removeEventListener('blur', handleSearch)
             handleSearch(event);
         }
     });
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(bungieName);
         if (bungieName) {
             (event.target as HTMLInputElement).disabled = true;
-            const response = await fetch(`/api/player-names-and-membership/${bungieName}`);
+            const response = (await fetch(`/api/search/?bungieName=${encodeURIComponent(bungieName)}`));
             if (response.ok) {
                 const playerNamesAndMembership : PlayerNamesAndMembership = await response.json();
                 const url = new URL('/resultsPage.html', window.location.origin);
@@ -30,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Display an error message or handle the error as appropriate
                 console.error('Error fetching player names and membership');
                 (event.target as HTMLInputElement).disabled = false;
+                searchInput.addEventListener('blur', handleSearch);
             }
         }
     }

@@ -5,15 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Allies Report - Results</title>
   <link rel="icon" href="https://www.bungie.net/7/ca/destiny/icons/profile/commendationsicon.png">
-  <link rel="stylesheet" href="/styles/resultsPage.css">
+  <link rel="stylesheet" href="./styles/resultsPage.css">
 </head>
 <body>
   <div id="app">
-    <div id="namesContainer" class="loading"></div>
-    <div id="chatGPTSummary" class="loading"></div>
-    <div id="activityPointsChart" class="loading"></div>
-    <div id="categories" class="loading"></div>
+    <div class="container">
+      <div id= "#names-container" class="names-container" class="loading">
+          <h1 id="#display-name" class="title">GUARDAN_NAME</h1>
+          <h3 id="#bungie-name" class="bungie-name">kirillburton#0667</h3>
+      </div>
+      <div id="#chatGPT-summary" class="chatGPTSummary" class="loading">
+          <span>Summary is being generated...</span>
+      </div>
+      <h2 class="subtitle">ACTIVITES</h2>
+      <div class="chart-wrapper">
+          <canvas id="#activityPointsChart" class="loading"></canvas>
+      </div>
+      <h2 class="subtitle">COMMENDATIONS</h2> 
+      <div id="#categories" class="categories" class="loading"></div>
+      <div class="footer">
+          <span>developed by <a href="https://linktr.ee/kirillburton">kirillburton</a></span>
+      </div>
   </div>
-  <script type="module" src="/scripts/resultsRenderer.js"></script>
+  </div>
+  <script type="module" src="./scripts/resultsRenderer.ts"></script>
 </body>
 </html>

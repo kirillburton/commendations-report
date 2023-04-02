@@ -1,3 +1,6 @@
+import 'dotenv/config' 
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
@@ -7,26 +10,41 @@ import {
   getCommendationsByMembershipId
 } from './controllers/bungieNetApiController.js';
 import { getAIPlayerSummary } from './controllers/openAIApiController.js';
-import { PlayerNamesAndMembership, Temp } from '../types/customTypes.js';
+import { PlayerNamesAndMembership, PlayerDataForChatGPT } from '../types/customTypes.js';
 import { mapCommendationsResponse } from './apiCommendationsComponentMapper.js';
-import { getCommendationsSummaryAsTextForPrompt } from './getCommendationsByMembershipId.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-
-const __dirname = path.dirname(__filename);
 
 const app = new Koa();
+// Error handling
+app.use(async (ctx, next) => {
+    try {
+        await next();
+    } catch (err: any) {
+        ctx.status = err.status || 500;
+        ctx.body = { 
+            error: {
+                code: ctx.status,
+                message: err.message 
+            }
+        }
+        ctx.app.emit('error', err, ctx);
+    }
+});
+
 const router = new Router();
 
-const fullpath = path.join(__dirname, '../client');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const fullpath = join(__dirname, '../client');
+
+
 app.use(serve(fullpath));
-console.log(path);
 app.use(bodyParser());
 
-router.post('/api/search', async (ctx: any) => {
-    const { bungieName } = ctx.request.body;
+
+router.get('/api/search/', async (ctx: any) => {
+    const bungieName = ctx.request.query.bungieName;
+    //const { bungieName } = ctx.request.body;
+    console.log(bungieName);
     const playerNamesAndMemberships = await getPlayerNamesAndMembershipByBungieName(bungieName);
 
     if (!playerNamesAndMemberships) {
@@ -53,9 +71,14 @@ router.post('/api/commendations', async (ctx: any) => {
 });
   
 router.post('/api/summary', async (ctx: any) => {
-    const data : Temp = ctx.request.body;
-    const commendationsText = getCommendationsSummaryAsTextForPrompt(data.playerProfile, data.commendationSummary);
-    const summary = await getAIPlayerSummary(commendationsText);
+    const profile : PlayerDataForChatGPT = ctx.request.body;
+
+    const name = profile.name; 
+    const commendations = profile.commendationSummary;
+    const profileForPrompt = `${name}\n${JSON.stringify(commendations)}`;
+    console.log(`Text for prompt is: ${profileForPrompt}`);
+
+    const summary = await getAIPlayerSummary(profileForPrompt);
     ctx.body = summary;
 });
   

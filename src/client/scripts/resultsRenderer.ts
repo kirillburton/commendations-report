@@ -4,7 +4,8 @@
 // Use these functions in conjunction with the data received from the APIs to update the resultsPage.html content.
 
 // Pass initialData from the resultsPage.html
-import { CommendationSummary, PlayerNamesAndMembership, Temp } from "../../types/customTypes.js";
+import { CommendationSummary, PlayerNamesAndMembership, PlayerDataForChatGPT } from "../../types/customTypes";
+import { renderCommendationsAndActivities } from "./commendationsAndActivitiesRender";
 
 const urlParams = new URLSearchParams(window.location.search);
 const initialDataString = urlParams.get('playerNamesAndMembership') || "";
@@ -20,12 +21,11 @@ function setLoading(elementId: string, loading: boolean) {
 }
 
 function renderNamesContainer(data: {bungieGlobalDisplayName: string, bungieName: string}) {
-  const container = document.getElementById('namesContainer')!;
-  container.innerHTML = `
-    <h2>${data.bungieGlobalDisplayName}</h2>
-    <p>${data.bungieName}</p>
-  `;
-  setLoading('namesContainer', false);
+  const displayName = document.getElementById('#display-name');
+  const bungieName = document.getElementById('#bungie-name');
+  displayName!.textContent = data.bungieGlobalDisplayName;
+  bungieName!.textContent = data.bungieName
+  setLoading('#names-container', false);
 }
 
 async function fetchCommendations(membershipType: number, membershipId: string) {
@@ -37,26 +37,31 @@ async function fetchCommendations(membershipType: number, membershipId: string) 
   return await response.json();
 }
 
-async function fetchSummary(profile: any) {
+async function fetchSummary (profile: PlayerDataForChatGPT) {
+  const stringifiedProfile = JSON.stringify(profile);
+  console.log("Sending this to allies report server: ", stringifiedProfile)
   const response = await fetch('/api/summary', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ profile }),
+    body: stringifiedProfile,
   });
-  return await response.json();
+  return response.text();
 }
 
 function renderActivityPointsChartAndCategories(data: any) {
   console.log(data);
   // Render activityPointsChart with the data
-  setLoading('activityPointsChart', false);
-  setLoading('categories', false);
+  setLoading('#activityPointsChart', false);
+  setLoading('#categories', false);
+  renderCommendationsAndActivities(data);
 }
 
-function renderChatGPTSummary(data: any) {
-  console.log(data);
+function renderChatGPTSummary(summary: string) {
+  console.log(summary);
+  const summaryElement = document.getElementById('#chatGPT-summary');
+  summaryElement!.textContent = summary;
   // Render chatGPTSummary with the data
-  setLoading('chatGPTSummary', false);
+  setLoading('#chatGPT-summary', false);
 }
 
 // Initialize
@@ -67,8 +72,9 @@ function renderChatGPTSummary(data: any) {
   const commendations : CommendationSummary = await fetchCommendations(membershipType, membershipId);
   renderActivityPointsChartAndCategories(commendations);
 
-  const forBot : Temp = { playerProfile: initialData, commendationSummary: commendations };
+  const forBot = { name: bungieGlobalDisplayName, commendationSummary: commendations };
 
+  console.log("Prepared data for allies report server: ", forBot)
   const summary = await fetchSummary(forBot);
   renderChatGPTSummary(summary);
 })();

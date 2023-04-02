@@ -2,11 +2,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { getCommendationsSummaryAsTextForPrompt } from './getCommendationsByMembershipId.js';
-import { getCommendationsByMembershipId, getPlayerNamesAndMembershipByBungieName} from './controllers/bungieNetApiController.js'
-import { getAIPlayerSummary } from './controllers/openAIApiController.js';
-import { PlayerProfile } from '../types/customTypes.js';
-import { mapCommendationsResponse } from './apiCommendationsComponentMapper.js';
+import { getCommendationsSummaryAsTextForPrompt } from './getCommendationsByMembershipId';
+import { getCommendationsByMembershipId, getPlayerNamesAndMembershipByBungieName} from './controllers/bungieNetApiController'
+import { getAIPlayerSummary } from './controllers/openAIApiController';
+import { PlayerProfile } from '../types/customTypes';
+import { mapCommendationsResponse } from './apiCommendationsComponentMapper';
 
 console.log(`BUNGIE API KEY IS: ${process.env.BUNGIE_API_KEY}`);
 //npm run getProfile -- "Errorick#4513"
