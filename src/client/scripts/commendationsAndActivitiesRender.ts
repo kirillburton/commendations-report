@@ -3,7 +3,14 @@ import { Chart } from 'chart.js/auto';
 
 export function renderCommendationsAndActivities(commendationsSummary: CommendationSummary) {
 
+    
     const categoriesContainer = document.getElementById('#categories') as HTMLDivElement;
+
+    const countWrapper = document.getElementById('#commendations-count') as HTMLDivElement;
+    const commendationCountElement = document.createElement('span');
+    commendationCountElement.classList.add('text-description');
+    commendationCountElement.innerHTML = `Points: <strong>${commendationsSummary.totalScore}</strong><br>Received: <strong>${commendationsSummary.received}</strong>`;
+    countWrapper.appendChild(commendationCountElement);
 
     commendationsSummary.categories.forEach((category) => {
         const categoryElement = document.createElement('div');
@@ -103,7 +110,7 @@ export function renderCommendationsAndActivities(commendationsSummary: Commendat
         new Chart(ctx, {
             type: 'bar',
             data: {
-              labels: ['Commendations received by activity'],
+              labels: ['Commendations count:'],
               datasets: sortedActivityPoints,
             },
             options: {
@@ -153,9 +160,32 @@ export function renderCommendationsAndActivities(commendationsSummary: Commendat
                 tooltip: {
                     callbacks: {
                         label: function (context) {
-                            const label = context.dataset.label || '';
+                            let label = context.dataset.label || '';
+                            const count = activityPointsValues[activityPointsLabels.indexOf(label)];
+                            switch (label) {
+                              case "crucible":
+                                label = "Crucible";
+                                break;
+                              case "trials":
+                                label = "Trials of Osiris";
+                                break;
+                              case "gambit":
+                                label = "Gambit";
+                                break;
+                              case "casualPve":
+                                label = "Matchmade PvE";
+                                break;
+                              case "endgamePve":
+                                label = "Non-matchmade PvE";
+                                break;
+                              case "raidsAndDungeons":
+                                label = "Raids & Dungeons";
+                                break;    
+                              default:
+                                break;
+                            }
                             const value = context.parsed.x;
-                            return label + ': ' + value.toFixed(2) + '%';
+                            return `${count} – ${label}: ${value.toFixed(2)}%`;
                         }
                     }
                 },

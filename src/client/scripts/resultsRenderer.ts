@@ -16,16 +16,23 @@ function setLoading(elementId: string, loading: boolean) {
   if (loading) {
     element.classList.add('loading');
   } else {
-    element.classList.remove('loading');
+    element.style.display = 'none';
   }
 }
+
+const header = document.getElementById('#header-link') as HTMLDivElement;
+  
+header.addEventListener('click', () => {
+    const url = new URL('/index.html', window.location.origin);
+    window.location.href = url.toString();
+});
 
 function renderNamesContainer(data: {bungieGlobalDisplayName: string, bungieName: string}) {
   const displayName = document.getElementById('#display-name');
   const bungieName = document.getElementById('#bungie-name');
-  displayName!.textContent = data.bungieGlobalDisplayName;
-  bungieName!.textContent = data.bungieName
-  setLoading('#names-container', false);
+  displayName!.textContent = data.bungieGlobalDisplayName.toUpperCase();
+  bungieName!.textContent = '#' + data.bungieName.split('#')[1];
+  //setLoading('#names-container', false);
 }
 
 async function fetchCommendations(membershipType: number, membershipId: string) {
@@ -51,23 +58,42 @@ async function fetchSummary (profile: PlayerDataForChatGPT) {
 function renderActivityPointsChartAndCategories(data: any) {
   console.log(data);
   // Render activityPointsChart with the data
-  setLoading('#activityPointsChart', false);
-  setLoading('#categories', false);
+  setLoading('#activities-loading', false);
+  setLoading('#commendation-category-loading-container', false);
+  setLoading('#commendations-count-loading-wrapper', false);
   renderCommendationsAndActivities(data);
 }
 
 function renderChatGPTSummary(summary: string) {
   console.log(summary);
+  const formattedSummary = summary.replace(
+    'SUMMARY:',
+    '<strong>SUMMARY:</strong><br>'
+  ).replace(
+    'EXPERIENCED IN:',
+    '<br><br><strong>EXPERIENCED IN:</strong><br>'
+  );
+
   const summaryElement = document.getElementById('#chatGPT-summary');
-  summaryElement!.textContent = summary;
+  
+  if (summaryElement) {
+    const loadedSummaryElement = document.createElement('span');
+    loadedSummaryElement.innerHTML = formattedSummary;
+    setLoading('#summary-loading', false);
+    summaryElement.appendChild(loadedSummaryElement);
+  } else {
+    console.error('Summary element not found on the page');
+  }
   // Render chatGPTSummary with the data
-  setLoading('#chatGPT-summary', false);
 }
 
 // Initialize
 (async function () {
   const { membershipType, membershipId, bungieGlobalDisplayName, bungieName } = initialData;
-  renderNamesContainer({ bungieGlobalDisplayName, bungieName });
+  const displayNameElement = document.getElementById('#display-name');
+  const bungieNameElement = document.getElementById('#bungie-name');
+  displayNameElement!.textContent = bungieGlobalDisplayName.toUpperCase();
+  bungieNameElement!.textContent = '#' + bungieName.split('#')[1];
 
   const commendations : CommendationSummary = await fetchCommendations(membershipType, membershipId);
   renderActivityPointsChartAndCategories(commendations);

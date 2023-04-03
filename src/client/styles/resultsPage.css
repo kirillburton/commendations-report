@@ -4,8 +4,29 @@ body {
     font-family: 'Neue Haas Grotesk Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     background-color: #f0f1f3;
     color: #333;
+    -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
+}
+
+.header {
+    width: -webkit-fill-available;
+    place-items: center;
+    margin: 10px;
+    display: flex;
+    position: fixed;
+    font-size: xx-small;
+    top: 0vh;
+    justify-content: center;
+    background-color: #333;
+    color: #EEE;
+    margin: 0px;
+    z-index: 100;
+}
+
+.header .logo {
+    margin: 12px;
+    margin-left: -14px;
 }
 
 .container {
@@ -21,25 +42,24 @@ body {
 }
 
 .bungie-name {
+    font-size: 32px;
+    font-weight: 700;
     display: flex;
-    text-align: right;
-    color: #888;
-    font-weight: normal;
-    /* margin-left: 10px; */
-    font-style: italic;
+    text-align: left;
+    align-items: end;
+    color: #ADE; /* dark theme color #65CAFF*/
+    margin-left: 2px;
     justify-content: center;
-    align-items: flex-end;
-    margin: 0 0 30px 0;
 }
 
 .names-container {
     display: flex;
     flex-direction: row;
     margin-bottom: 30px;
-    padding-top: 100px;
+    padding-top: 140px;
     width: inherit;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 .categories {
@@ -62,14 +82,26 @@ body {
     transition: 0.3s;
 }
 
+.commendations-count {
+    align-content: end;
+    display: flex;
+    flex-direction: row-reverse;
+    margin-bottom: 20px;
+    margin-top: -50px;
+    text-align: end;
+}
+
+.text-description {
+    font-size: 14px;
+}
+
 .footer {
-    /* position: absolute; */
     display: flex;
     flex-direction: column;
     margin: 10px;
     color: gray;
     font-size: smaller;
-    margin-top: 100px;
+    margin-top: 50px;
     flex-wrap: wrap;
     align-items: flex-end;
     width: auto;
@@ -93,7 +125,7 @@ body {
     color: #fff;
     margin-bottom: 10px;
     padding-top: 10px;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
 }
 
 .commendation {
@@ -168,11 +200,14 @@ body {
 
 .chart-wrapper {
     max-width: 800px;
-    height: 80px;
+    height: 50px;
     margin: 0 auto;
 }
 
-#activityPointsChart {
-    height: 100%;
+.activity-points-chart {
     display: block;
+    box-sizing: border-box;
+    height: 50px;
+    width: 808px; /*ins't perfectly aligned out of the box*/
+    margin-left: -8px; /*ins't perfectly aligned out of the box*/
 }
