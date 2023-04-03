@@ -84,8 +84,9 @@ router.post('/api/summary', async (ctx: any) => {
   
 app.use(router.routes()).use(router.allowedMethods());
   
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const PORT = parseInt(process.env.PORT || "3000");
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
-});
+})
+
   

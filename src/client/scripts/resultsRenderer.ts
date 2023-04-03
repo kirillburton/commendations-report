@@ -27,14 +27,6 @@ header.addEventListener('click', () => {
     window.location.href = url.toString();
 });
 
-function renderNamesContainer(data: {bungieGlobalDisplayName: string, bungieName: string}) {
-  const displayName = document.getElementById('#display-name');
-  const bungieName = document.getElementById('#bungie-name');
-  displayName!.textContent = data.bungieGlobalDisplayName.toUpperCase();
-  bungieName!.textContent = '#' + data.bungieName.split('#')[1];
-  //setLoading('#names-container', false);
-}
-
 async function fetchCommendations(membershipType: number, membershipId: string) {
   const response = await fetch('/api/commendations', {
     method: 'POST',
