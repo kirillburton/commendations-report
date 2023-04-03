@@ -1,0 +1,50 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main # Change this to the branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 18 # Change this to the version of Node.js you're using
+
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install parcel
+      run: npm install -g parcel
+      
+    - name: Install typescript
+      run: npm install -g typescript
+
+    - name: Build the application
+      run: npm run build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-north-1 # where my EC2 instance is running
+
+    - name: Install AWS CLI
+      run: sudo apt-get install -y awscli
+
+    - name: Zip the deployment package
+      run: zip -r deployment-package.zip dist/*
+
+    - name: Push the deployment package to Amazon S3
+      run: aws s3 cp deployment-package.zip s3://allies-report-bucket/deployment-package.zip
+
+    - name: Deploy the application to EC2
+      run: aws deploy create-deployment --application-name allies-report --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name allies-report-deployment-group --s3-location bucket=allies-report-bucket,bundleType=zip,key=deployment-package.zip
