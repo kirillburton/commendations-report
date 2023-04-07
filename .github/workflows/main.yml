@@ -47,4 +47,4 @@ jobs:
       run: aws s3 cp deployment-package.zip s3://allies-report-bucket/deployment-package.zip
 
     - name: Deploy the application to EC2
-      run: aws deploy create-deployment --application-name allies-report --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name allies-report-deployment-group --s3-location bucket=allies-report-bucket,bundleType=zip,key=deployment-package.zip
+      run: aws deploy create-deployment --application-name allies-report --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name allies-report-deployment-group --s3-location bucket=allies-report-bucket,bundleType=zip,key=deployment-package.zip --file-exists-behavior OVERWRITE
