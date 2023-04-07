@@ -28,7 +28,7 @@ jobs:
       run: npm install -g typescript
 
     - name: Create dotenv file
-      run: echo "${{ vars.BUNGIE_API_KEY }}\r${{ vars.OPENAI_API_KEY}}" > .env
+      run: echo "BUNGIE_API_KEY:${{ vars.BUNGIE_API_KEY }}\nOPENAI_API_KEY:${{ vars.OPENAI_API_KEY}}" > .env
 
     - name: Build the application
       run: npm run build
