@@ -1,6 +1,8 @@
 import 'dotenv/config' 
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
+import https from 'https';
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
@@ -83,10 +85,33 @@ router.post('/api/summary', async (ctx: any) => {
 });
   
 app.use(router.routes()).use(router.allowedMethods());
+
+const config = {
+    domain: 'allies.report',
+    https: {
+        port: 443, 
+        options: {
+            key: fs.readFileSync(join(__dirname, '../../certs/privkey.pem'), 'utf8').toString(),
+            cert: fs.readFileSync(join(__dirname, '../../certs/fullchain.pem'), 'utf8').toString(),
+        },
+    },
+};
+    
+const serverCallback = app.callback();
+    
+try {
+    const httpsServer = https.createServer(config.https.options, serverCallback);
+    httpsServer.listen(config.https.port, () => {
+        console.log(`HTTPS server OK: https://${config.domain}:${config.https.port}`);
+    });
+} catch (ex : any) {  
+    console.error('Failed to start HTTPS server\n', ex, (ex && ex.stack));
+}
+
   
-const PORT = parseInt(process.env.PORT || "3000");
+/*const PORT = parseInt(process.env.PORT || "3000");
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
-})
+})*/
 
   
