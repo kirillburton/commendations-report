@@ -41,7 +41,7 @@ jobs:
       run: sudo apt-get install -y awscli
 
     - name: Zip the deployment package
-      run: zip -r deployment-package.zip dist/* package.json package-lock.json appspec.yaml scripts/*
+      run: zip -r deployment-package.zip dist/* package.json package-lock.json appspec.yml scripts/*
 
     - name: Push the deployment package to Amazon S3
       run: aws s3 cp deployment-package.zip s3://allies-report-bucket/deployment-package.zip
