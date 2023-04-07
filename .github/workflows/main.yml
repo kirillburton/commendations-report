@@ -27,6 +27,9 @@ jobs:
     - name: Install typescript
       run: npm install -g typescript
 
+    - name: Create dotenv file
+      run: echo "${{ vars.BUNGIE_API_KEY }}\r${{ vars.OPENAI_API_KEY}}" > .env
+
     - name: Build the application
       run: npm run build
 
@@ -41,7 +44,7 @@ jobs:
       run: sudo apt-get install -y awscli
 
     - name: Zip the deployment package
-      run: zip -r deployment-package.zip dist/* package.json package-lock.json appspec.yml scripts/*
+      run: zip -r deployment-package.zip dist/* .env package.json package-lock.json appspec.yml scripts/*
 
     - name: Push the deployment package to Amazon S3
       run: aws s3 cp deployment-package.zip s3://allies-report-bucket/deployment-package.zip

@@ -1,2 +1,2 @@
 #!/bin/bash
-systemctl stop allies-report
+sudo systemctl stop allies-report

@@ -2,6 +2,7 @@ import 'dotenv/config'
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import http from 'http';
 import https from 'https';
 import Koa from 'koa';
 import Router from 'koa-router';
@@ -95,17 +96,24 @@ const config = {
             cert: fs.readFileSync(join(__dirname, '../../certs/fullchain.pem'), 'utf8').toString(),
         },
     },
+    http: {
+        port: 80
+    }
 };
     
 const serverCallback = app.callback();
     
 try {
     const httpsServer = https.createServer(config.https.options, serverCallback);
+    const httpServer = http.createServer(serverCallback);
+    httpServer.listen(config.http.port, () => {
+        console.log(`HTTP server OK: http://${config.domain}:${config.http.port}`);
+    })
     httpsServer.listen(config.https.port, () => {
         console.log(`HTTPS server OK: https://${config.domain}:${config.https.port}`);
     });
 } catch (ex : any) {  
-    console.error('Failed to start HTTPS server\n', ex, (ex && ex.stack));
+    console.error('Failed to start server\n', ex, (ex && ex.stack));
 }
 
   

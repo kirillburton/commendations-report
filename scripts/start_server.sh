@@ -1,2 +1,2 @@
 #!/bin/bash
-systemctl start allies-report
+sudo systemctl start allies-report
