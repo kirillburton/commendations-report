@@ -11,7 +11,7 @@ export type SearchPlayerResponse = {
     bungieGlobalDisplayName: string;
     bungieGlobalDisplayNameCode: number;
 };
-  
+
 export type ApiResponse = {
     Response: SearchPlayerResponse[];
     ErrorCode: number;
@@ -34,4 +34,3 @@ export type CommendationsComponentResponse = {
         };
     };
 };
-  

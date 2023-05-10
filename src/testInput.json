@@ -1,1 +1,48 @@
-{"totalScore":2713,"given":496,"received":435,"categories":[{"name":"Leadership","commendations":[{"name":"Perceptive","value":55},{"name":"Knowledgeable","value":30}]},{"name":"Mastery","commendations":[{"name":"Playmaker","value":45},{"name":"Primeval Instinct","value":9},{"name":"Heroic","value":28},{"name":"Pacesetter","value":39}]},{"name":"Ally","commendations":[{"name":"Indispensable","value":39},{"name":"Selfless","value":8},{"name":"Thoughtful","value":33},{"name":"Patient and Considerate","value":15}]},{"name":"Fun","commendations":[{"name":"Joy Bringer","value":56},{"name":"Level-headed","value":36},{"name":"Saint's Favorite","value":42}]}],"activityPoints":{"crucible":81,"trials":81,"gambit":45,"casualPve":89,"endgamePve":69,"raidsAndDungeons":136}}
+{
+    "totalScore": 2713,
+    "given": 496,
+    "received": 435,
+    "categories": [
+        {
+            "name": "Leadership",
+            "commendations": [
+                { "name": "Perceptive", "value": 55 },
+                { "name": "Knowledgeable", "value": 30 }
+            ]
+        },
+        {
+            "name": "Mastery",
+            "commendations": [
+                { "name": "Playmaker", "value": 45 },
+                { "name": "Primeval Instinct", "value": 9 },
+                { "name": "Heroic", "value": 28 },
+                { "name": "Pacesetter", "value": 39 }
+            ]
+        },
+        {
+            "name": "Ally",
+            "commendations": [
+                { "name": "Indispensable", "value": 39 },
+                { "name": "Selfless", "value": 8 },
+                { "name": "Thoughtful", "value": 33 },
+                { "name": "Patient and Considerate", "value": 15 }
+            ]
+        },
+        {
+            "name": "Fun",
+            "commendations": [
+                { "name": "Joy Bringer", "value": 56 },
+                { "name": "Level-headed", "value": 36 },
+                { "name": "Saint's Favorite", "value": 42 }
+            ]
+        }
+    ],
+    "activityPoints": {
+        "crucible": 81,
+        "trials": 81,
+        "gambit": 45,
+        "casualPve": 89,
+        "endgamePve": 69,
+        "raidsAndDungeons": 136
+    }
+}

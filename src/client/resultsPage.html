@@ -1,56 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Allies Report - Results</title>
-  <link rel="icon" href="https://www.bungie.net/7/ca/destiny/icons/profile/commendationsicon.png">
-  <link rel="stylesheet" href="./styles/resultsPage.css">
-  <link rel="stylesheet" href="./styles/loading.css">
-</head>
-<body>
-  <div class="header" id="#header-link"><img class="logo" width="40" height="40" src="https://www.bungie.net/7/ca/destiny/icons/profile/commendationsicon.png"><h1>allies.report</h1></div>
-  <div id="app">
-    <div class="container">
-      <div id= "#names-container" class="names-container">
-          <h1 id="#display-name" class="title">GUARDAN_NAME</h1>
-          <h1 id="#bungie-name" class="bungie-name">#0667</h3>
-      </div>
-      <div id="#chatGPT-summary" class="chatGPT-summary text-description">
-        <div id="#summary-loading">
-          <span><strong>SUMMARY:</strong><br>
-          <div class="animated-background rect1"></div>
-          <div class="animated-background rect2"></div>
-          <div class="animated-background rect3"></div>
-          <br><br><strong>EXPERIENCED IN:</strong><br>
-          <div class="animated-background rect4"></div></span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Allies Report - Results</title>
+        <link
+            rel="icon"
+            href="https://www.bungie.net/7/ca/destiny/icons/profile/commendationsicon.png"
+        />
+        <link rel="stylesheet" href="./styles/resultsPage.css" />
+        <link rel="stylesheet" href="./styles/loading.css" />
+    </head>
+    <body>
+        <div class="header" id="#header-link">
+            <img
+                class="logo"
+                width="40"
+                height="40"
+                src="https://www.bungie.net/7/ca/destiny/icons/profile/commendationsicon.png"
+            />
+            <h1>allies.report</h1>
         </div>
-      </div>
-      <h2 class="subtitle">ACTIVITES</h2>
-      <div class="chart-wrapper">
-          <div class="animated-background rect-activities" id="#activities-loading"></div>
-          <canvas id="#activityPointsChart" class="activity-points-chart"></canvas>
-      </div>
-      <h2 class="subtitle">COMMENDATIONS</h2> 
-      <div id="#commendations-count" class="commendations-count">
-        <div class="commendations-count-loading-wrapper" id="#commendations-count-loading-wrapper">
-          <div class="animated-background rect-points"></div>
-          <div class="animated-background rect-received"></div> 
+        <div id="app">
+            <div class="container">
+                <div id="#names-container" class="names-container">
+                    <h1 id="#display-name" class="title">GUARDAN_NAME</h1>
+                    <h1 id="#bungie-name" class="bungie-name">#0667</h1>
+                </div>
+                <div
+                    id="#chatGPT-summary"
+                    class="chatGPT-summary text-description"
+                >
+                    <div id="#summary-loading">
+                        <span
+                            ><strong>SUMMARY:</strong><br />
+                            <div class="animated-background rect1"></div>
+                            <div class="animated-background rect2"></div>
+                            <div class="animated-background rect3"></div>
+                            <br /><br /><strong>EXPERIENCED IN:</strong><br />
+                            <div class="animated-background rect4"></div
+                        ></span>
+                    </div>
+                </div>
+                <h2 class="subtitle">ACTIVITES</h2>
+                <div class="chart-wrapper">
+                    <div
+                        class="animated-background rect-activities"
+                        id="#activities-loading"
+                    ></div>
+                    <canvas
+                        id="#activityPointsChart"
+                        class="activity-points-chart"
+                    ></canvas>
+                </div>
+                <h2 class="subtitle">COMMENDATIONS</h2>
+                <div id="#commendations-count" class="commendations-count">
+                    <div
+                        class="commendations-count-loading-wrapper"
+                        id="#commendations-count-loading-wrapper"
+                    >
+                        <div class="animated-background rect-points"></div>
+                        <div class="animated-background rect-received"></div>
+                    </div>
+                </div>
+                <div id="#categories" class="categories">
+                    <div
+                        class="commendation-category-loading-container"
+                        id="#commendation-category-loading-container"
+                    >
+                        <div
+                            class="animated-background rect-commendations-category"
+                        ></div>
+                        <div
+                            class="animated-background rect-commendations-category"
+                        ></div>
+                        <div
+                            class="animated-background rect-commendations-category"
+                        ></div>
+                        <div
+                            class="animated-background rect-commendations-category"
+                        ></div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <span
+                        >developed by
+                        <a href="https://linktr.ee/kirillburton"
+                            >kirillburton</a
+                        ></span
+                    >
+                </div>
+            </div>
         </div>
-      </div>
-      <div id="#categories" class="categories">
-        <div class="commendation-category-loading-container" id="#commendation-category-loading-container">
-          <div class="animated-background rect-commendations-category"></div>
-          <div class="animated-background rect-commendations-category"></div>
-          <div class="animated-background rect-commendations-category"></div>
-          <div class="animated-background rect-commendations-category"></div>
-        </div>
-      </div>
-      <div class="footer">
-          <span>developed by <a href="https://linktr.ee/kirillburton">kirillburton</a></span>
-      </div>
-    </div>
-  </div>
-  <script type="module" src="./scripts/resultsRenderer.ts"></script>
-</body>
+        <script type="module" src="./scripts/resultsRenderer.ts"></script>
+    </body>
 </html>
