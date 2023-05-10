@@ -2,10 +2,11 @@
 
 import { PlayerNamesAndMembership } from '../../types/customTypes.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('pageshow', () => {
     const searchInput = document.getElementById(
         'bungieName'
     ) as HTMLInputElement;
+    searchInput.disabled = false;
 
     searchInput.addEventListener('blur', handleSearch);
     searchInput.addEventListener('keydown', (event: KeyboardEvent) => {
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
                 window.location.href = url.toString();
             } else {
-                // Display an error message or handle the error as appropriate
                 console.error('Error fetching player names and membership');
                 (event.target as HTMLInputElement).disabled = false;
                 searchInput.addEventListener('blur', handleSearch);
