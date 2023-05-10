@@ -43,6 +43,17 @@ body {
     text-align: left;
 }
 
+.unselectable {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+.link {
+    cursor: pointer;
+}
+
 .bungie-name {
     font-size: 32px;
     font-weight: 700;

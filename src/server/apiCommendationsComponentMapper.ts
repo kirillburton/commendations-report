@@ -95,6 +95,16 @@ const commendationCategories: CommendationCategoryMap[] = [
                 hash: '3030493827',
                 text: "Saint's Favorite",
                 weight: { ...defaultWeight, trials: true }
+            },
+            {
+                hash: '357212819',
+                text: 'Best Dressed',
+                weight: {
+                    ...defaultWeight,
+                    crucible: true,
+                    casualPve: true,
+                    gambit: true
+                }
             }
         ]
     }

@@ -98,7 +98,8 @@ function renderChatGPTSummary(summary: string) {
     const displayNameElement = document.getElementById('#display-name');
     const bungieNameElement = document.getElementById('#bungie-name');
     displayNameElement!.textContent = bungieGlobalDisplayName.toUpperCase();
-    bungieNameElement!.textContent = '#' + bungieName.split('#')[1];
+    bungieNameElement!.textContent =
+        '#' + bungieName.split('#')[1].padStart(4, '0');
 
     const commendations: CommendationSummary = await fetchCommendations(
         membershipType,
