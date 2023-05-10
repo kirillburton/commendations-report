@@ -5,7 +5,7 @@ import {
     CommendationsComponentResponse
 } from '../../types/bungieNetApiTypes.js';
 import { PlayerNamesAndMembership } from '../../types/customTypes.js';
-import { getBungieData } from '../transport/apiTransport';
+import { getBungieData } from '../transport/apiTransport.js';
 
 class BungieNetApiError extends Error {
     constructor(message: string) {

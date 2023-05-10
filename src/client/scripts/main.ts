@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function handleSearch(event: Event) {
         const bungieName = (event.target as HTMLInputElement).value.trim();
-        console.log(bungieName);
         if (bungieName) {
             (event.target as HTMLInputElement).disabled = true;
             const response = await fetch(

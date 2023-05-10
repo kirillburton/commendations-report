@@ -1,7 +1,7 @@
 // src/server/controllers/openAIApiController.ts
 // controller for getting generated summary from сhatgpt api
 import { generatePrompt } from './utils/promptGenerator.js';
-import { createOpenAIChatCompletion } from '../transport/apiTransport';
+import { createOpenAIChatCompletion } from '../transport/apiTransport.js';
 
 async function getAIPlayerSummary(profileForPrompt: string): Promise<string> {
     try {
@@ -25,6 +25,5 @@ async function getAIPlayerSummary(profileForPrompt: string): Promise<string> {
         return 'AI generated summary is not available at this time. ';
     }
 }
-//
 
 export { getAIPlayerSummary };

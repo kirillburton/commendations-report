@@ -47,7 +47,7 @@ async function fetchCommendations(
 
 async function fetchSummary(profile: PlayerDataForChatGPT) {
     const stringifiedProfile = JSON.stringify(profile);
-    console.log('Sending this to allies report server: ', stringifiedProfile);
+    console.log('Sending this to allies report server: ', stringifiedProfile); //debug
     const response = await fetch('/api/summary', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -57,7 +57,7 @@ async function fetchSummary(profile: PlayerDataForChatGPT) {
 }
 
 function renderActivityPointsChartAndCategories(data: any) {
-    console.log(data);
+    console.log(data); //debug
     // Render activityPointsChart with the data
     setLoading('#activities-loading', false);
     setLoading('#commendation-category-loading-container', false);
@@ -66,7 +66,8 @@ function renderActivityPointsChartAndCategories(data: any) {
 }
 
 function renderChatGPTSummary(summary: string) {
-    console.log(summary);
+    console.log(summary); //debug
+    // Render chatGPTSummary with the data
     const formattedSummary = summary
         .replace('SUMMARY:', '<strong>SUMMARY:</strong><br>')
         .replace(
@@ -84,7 +85,6 @@ function renderChatGPTSummary(summary: string) {
     } else {
         console.error('Summary element not found on the page');
     }
-    // Render chatGPTSummary with the data
 }
 
 // Initialize

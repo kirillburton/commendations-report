@@ -6,10 +6,9 @@
     "scripts": {
         "getProfile": "ts-node src/server/getProfile.ts",
         "build": "parcel build src/client/resultsPage.html src/client/index.html --dist-dir dist/client/ && tsc",
-        "copy-css": "cpy 'src/**/*.css' dist/ --parents",
-        "copy-html": "cpy 'src/**/*.html' dist/ --parents",
         "watch": "parcel watch src/client/resultsPage.html src/client/index.html --dist-dir dist/client/ & tsc --watch & nodemon dist/server/server.js",
         "start": "node dist/server/server.js",
+        "dev": "NODE_ENV=development npm run watch",
         "prepare": "husky install"
     },
     "author": "kirillburton",
