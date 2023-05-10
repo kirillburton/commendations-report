@@ -1,6 +1,6 @@
 // src/server/types/bungieNetApiTypes.ts
 
-export type SearchPlayerResponse = {
+export type PlayerMembership = {
     iconPath: string;
     crossSaveOverride: number;
     applicableMembershipTypes: number[];
@@ -12,8 +12,21 @@ export type SearchPlayerResponse = {
     bungieGlobalDisplayNameCode: number;
 };
 
+export type SearchResultsResponse = {
+    searchResults: SearchPlayerListItem[];
+    page: number;
+    hasMore: boolean;
+};
+
+export type SearchPlayerListItem = {
+    bungieGlobalDisplayName: string;
+    bungieGlobalDisplayNameCode: number;
+    bungieNetMembershipId: number;
+    destinyMemberships: PlayerMembership[];
+};
+
 export type ApiResponse = {
-    Response: SearchPlayerResponse[];
+    Response: PlayerMembership[] | SearchResultsResponse;
     ErrorCode: number;
     ThrottleSeconds: number;
     ErrorStatus: string;
