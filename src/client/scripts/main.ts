@@ -25,15 +25,70 @@ window.addEventListener('pageshow', () => {
                 `/api/search/?bungieName=${encodeURIComponent(bungieName)}`
             );
             if (response.ok) {
-                const playerNamesAndMembership: PlayerNamesAndMembership =
-                    await response.json();
+                let playerNamesAndMemberships:
+                    | PlayerNamesAndMembership
+                    | PlayerNamesAndMembership[]
+                    | undefined = await response.json();
+
+                if (Array.isArray(playerNamesAndMemberships)) {
+                    // TypeScript now knows this is an array
+                    const playerNamesAndMembershipsArray =
+                        playerNamesAndMemberships;
+
+                    // Create a datalist element
+                    const datalist = document.createElement('datalist');
+                    datalist.id = 'playerNamesAndMembershipsOptions';
+
+                    // Populate the datalist with options
+                    playerNamesAndMembershipsArray.forEach((player) => {
+                        const option = document.createElement('option');
+                        option.value = player.bungieName;
+                        datalist.appendChild(option);
+                    });
+
+                    // Attach datalist to the input element
+                    searchInput.setAttribute(
+                        'list',
+                        'playerNamesAndMembershipsOptions'
+                    );
+                    document.body.appendChild(datalist);
+                    searchInput.disabled = false;
+
+                    const waitForSelection = (): Promise<string> => {
+                        return new Promise((resolve) => {
+                            searchInput.addEventListener(
+                                'change',
+                                (event) => {
+                                    const selectedName = (
+                                        event.target as HTMLInputElement
+                                    ).value;
+                                    resolve(selectedName);
+                                },
+                                { once: true }
+                            ); // Listener will be removed after it runs once
+                        });
+                    };
+
+                    // Wait for the user to select an option
+                    const selectedName = await waitForSelection();
+                    playerNamesAndMemberships =
+                        playerNamesAndMembershipsArray.find(
+                            (player) => player.bungieName === selectedName
+                        );
+
+                    // Clean up datalist
+                    document.body.removeChild(datalist);
+                }
+
                 const url = new URL(
                     '/resultsPage.html',
                     window.location.origin
                 );
                 url.searchParams.set(
                     'playerNamesAndMembership',
-                    encodeURIComponent(JSON.stringify(playerNamesAndMembership))
+                    encodeURIComponent(
+                        JSON.stringify(playerNamesAndMemberships)
+                    )
                 );
                 window.location.href = url.toString();
             } else {

@@ -18,42 +18,58 @@ class BungieNetApiError extends Error {
 
 async function getPlayerNamesAndMembershipByBungieName(
     bungieName: string
-): Promise<PlayerNamesAndMembership | null> {
+): Promise<PlayerNamesAndMembership[] | PlayerNamesAndMembership | null> {
     const encodedBungieName = encodeURIComponent(bungieName);
     const url = `Destiny2/SearchDestinyPlayer/-1/${encodedBungieName}/`;
     try {
         const response = await getBungieData<ApiResponse>(url);
         const playerMembershipsFoundByBungieName =
             response.Response as PlayerMembership[];
-        let playerMemberships: PlayerMembership[] | undefined;
+        let playerMemberships: PlayerMembership[][] = [];
+        let playerProfilesFoundByPrefix: SearchPlayerListItem[] | null;
         if (playerMembershipsFoundByBungieName.length === 0) {
             const displayName = bungieName.split(encodeURIComponent('#'))[0];
-            const playerProfilesFoundByPrefix =
+            playerProfilesFoundByPrefix =
                 await getSearchPlayerResultsListByDisplayName(displayName);
 
-            playerMemberships =
-                playerProfilesFoundByPrefix?.[0]?.destinyMemberships ??
-                undefined;
-
-            if (!playerMemberships) {
+            if (!playerProfilesFoundByPrefix) {
                 return null;
+            }
+
+            for (const player of playerProfilesFoundByPrefix) {
+                playerMemberships?.push(player.destinyMemberships);
             }
         }
 
-        playerMemberships =
-            playerMemberships || playerMembershipsFoundByBungieName;
+        const players =
+            getPlayerNamesAndMembershipsFromApiMembershipEntities(
+                playerMemberships
+            );
+        return players?.length === 1 ? players[0] : players;
+    } catch (error) {
+        console.error(`Error getting player profile from Bungie API: ${error}`);
+        throw new BungieNetApiError(
+            `Error getting player profile from Bungie API: ${error}`
+        );
+    }
+}
 
+function getPlayerNamesAndMembershipsFromApiMembershipEntities(
+    memberships: PlayerMembership[][]
+): PlayerNamesAndMembership[] | null {
+    const playerNamesAndMemberships: PlayerNamesAndMembership[] = [];
+    for (const player of memberships) {
         const mainMembership =
-            playerMemberships.find(
+            player.find(
                 (item: PlayerMembership) =>
                     item.membershipType === item.crossSaveOverride
             ) ||
-            playerMemberships.find(
+            player.find(
                 (item: PlayerMembership) => item.crossSaveOverride === 0
             );
 
         if (!mainMembership) {
-            return null;
+            continue;
         }
 
         const playerProfile: PlayerNamesAndMembership = {
@@ -61,18 +77,14 @@ async function getPlayerNamesAndMembershipByBungieName(
             membershipId: mainMembership.membershipId,
             bungieGlobalDisplayName: mainMembership.bungieGlobalDisplayName,
             bungieName:
-                mainMembership.bungieGlobalDisplayName +
+                mainMembership.bungieGlobalDisplayName.toLowerCase() +
                 '#' +
                 mainMembership.bungieGlobalDisplayNameCode
         };
-
-        return playerProfile;
-    } catch (error) {
-        console.error(`Error getting player profile from Bungie API: ${error}`);
-        throw new BungieNetApiError(
-            `Error getting player profile from Bungie API: ${error}`
-        );
+        playerNamesAndMemberships.push(playerProfile);
     }
+
+    return playerNamesAndMemberships;
 }
 
 async function getSearchPlayerResultsListByDisplayName(

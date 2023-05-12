@@ -27,15 +27,7 @@ router.get('/api/search/', async (ctx: any) => {
         return;
     }
 
-    const playerNamesAndMembership: PlayerNamesAndMembership = {
-        membershipType: playerNamesAndMemberships.membershipType,
-        membershipId: playerNamesAndMemberships.membershipId,
-        bungieGlobalDisplayName:
-            playerNamesAndMemberships.bungieGlobalDisplayName,
-        bungieName: playerNamesAndMemberships.bungieName
-    };
-
-    ctx.body = playerNamesAndMembership;
+    ctx.body = playerNamesAndMemberships;
 });
 
 router.post('/api/commendations', async (ctx: any) => {
