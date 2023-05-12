@@ -41,19 +41,27 @@ body {
 }
 
 input {
-    font-family: 'Neue Haas Grotesk Text', -apple-system, BlinkMacSystemFont,
-        'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol';
-    font-size: x-large;
-    font-weight: 500;
-    padding: 10px;
-    width: 70vw;
-    max-width: 800px;
+    width: 100%;
     color: #333;
     text-align: center;
-    border: 2px solid #ccc;
     background-color: #f5f5f5;
+    border-color: #ddd;
+    border-width: 2px;
+    border-style: solid;
     border-radius: 10px;
+    padding: 10px;
+    font: inherit;
+    font-size: x-large;
+    font-weight: 500;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    transition: ease-in 0.5s;
+}
+
+.has-text {
+    border-radius: 0px;
 }
 
 .unselectable {
@@ -73,9 +81,61 @@ input::placeholder {
     opacity: 1; /* Firefox */
 }
 
+.load-animation {
+    border-color: #ddd;
+    -webkit-animation-duration: 3s;
+    animation-duration: 3s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: flash;
+    animation-name: flash;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: -webkit-linear-gradient(
+        left,
+        #dddddd 8%,
+        #cccccc 18%,
+        #dddddd 33%
+    );
+    background: linear-gradient(to right, #dddddd 8%, #cccccc 18%, #dddddd 33%);
+    -webkit-background-size: 800px 104px;
+    transition: none;
+}
+
+/* Mobile-friendly styles */
+@media (max-width: 768px) {
+    .load-animation {
+        -webkit-animation-duration: 6s;
+        animation-duration: 6s;
+        -webkit-background-size: 400px 104px;
+    }
+}
+
+@-webkit-keyframes flash {
+    0% {
+        background-position: -936px 0;
+    }
+    100% {
+        background-position: 936px 0;
+    }
+}
+
+@keyframes flash {
+    0% {
+        background-position: -936px 0;
+    }
+    100% {
+        background-position: 936px 0;
+    }
+}
+
 input:focus {
     outline: none;
-    border-color: #999;
+    border-color: #b8b8b8;
+    border-radius: 0px;
+    transition: all 0.5s;
 }
 
 .footer {
@@ -87,4 +147,184 @@ input:focus {
     width: auto;
     position: absolute;
     bottom: 0;
+}
+
+/* dropdown thingies */
+
+.search-container {
+    position: relative;
+    width: 70vw;
+    max-width: 800px;
+    left: -10px; /* minus padding of content elements */
+    font-family: Neue Haas Grotesk Text, -apple-system, BlinkMacSystemFont,
+        Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+        Segoe UI Emoji, Segoe UI Symbol;
+    font-size: x-large;
+    font-weight: 500;
+}
+
+.searchbar {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown {
+    color: #eee;
+    width: 100%;
+    perspective: 1000px;
+    z-index: 2;
+    background: #bbb;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-size: x-large;
+    display: flex;
+    font: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-color: #ddd;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+.dropdown:hover {
+    background: #888;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: ease-in 0.5s;
+}
+
+.emulated-hover {
+    background: #888;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: ease-in 0.5s;
+}
+
+.emulated-hover .dropdown_menu li {
+    display: block;
+}
+
+.dropdown:hover .dropdown_menu li {
+    display: block;
+}
+.dropdown_menu {
+    width: 100%;
+    perspective: 1000px;
+    z-index: -1;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: auto;
+    padding: initial;
+}
+
+.dropdown_menu li {
+    color: #888;
+    opacity: 0;
+    background-color: #e3e3e3;
+    padding: 10px 20px;
+    font-size: x-large;
+    display: none;
+    text-align: center;
+}
+
+.dropdown_menu li:hover {
+    background-color: #aaa;
+    color: #eee;
+}
+
+.dropdown:hover .dropdown_menu--animated {
+    display: block;
+}
+
+.dropdown_menu--animated {
+    display: none;
+}
+
+.dropdown_menu--animated li {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown_menu-2 .dropdown_item-1 {
+    transform-origin: top center;
+    animation: rotateX 300ms 60ms ease-in-out forwards;
+}
+
+.dropdown_menu-2 .dropdown_item-2 {
+    transform-origin: top center;
+    animation: rotateX 300ms 120ms ease-in-out forwards;
+}
+
+.dropdown_menu-2 .dropdown_item-3 {
+    transform-origin: top center;
+    animation: rotateX 300ms 180ms ease-in-out forwards;
+}
+
+.dropdown_menu-2 .dropdown_item-4 {
+    transform-origin: top center;
+    animation: rotateX 300ms 240ms ease-in-out forwards;
+}
+
+.dropdown_menu-2 .dropdown_item-5 {
+    transform-origin: top center;
+    animation: rotateX 300ms 300ms ease-in-out forwards;
+}
+
+@-moz-keyframes rotateX {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+@-webkit-keyframes rotateX {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+@-o-keyframes rotateX {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes rotateX {
+    0% {
+        opacity: 0;
+        transform: rotateX(-90deg);
+    }
+    50% {
+        transform: rotateX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
 }
