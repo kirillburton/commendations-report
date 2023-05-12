@@ -11,14 +11,14 @@ export type PlayerProfile = {
     bungieName: string;
     displayName: string;
     commendationSummary: CommendationSummary;
-    chatGPTSummary: string; 
-}
+    chatGPTSummary: string;
+};
 
 export interface Commendation {
     name: string;
     value: number;
-  }
-  
+}
+
 export interface CommendationCategory {
     name: string;
     commendations: Commendation[];
@@ -48,7 +48,7 @@ export type ActivitiesWeight = {
     casualPve: boolean;
     endgamePve: boolean;
     raidsAndDungeons: boolean;
-}
+};
 
 export const defaultWeight = {
     crucible: false,
@@ -56,8 +56,8 @@ export const defaultWeight = {
     gambit: false,
     casualPve: false,
     endgamePve: false,
-    raidsAndDungeons: false,
-}
+    raidsAndDungeons: false
+};
 
 export type ProfileActivitiesWeight = {
     crucible: number;
@@ -66,9 +66,9 @@ export type ProfileActivitiesWeight = {
     casualPve: number;
     endgamePve: number;
     raidsAndDungeons: number;
-}
+};
 
 export type PlayerDataForChatGPT = {
     name: string;
     commendationSummary: CommendationSummary;
-}
+};

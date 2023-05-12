@@ -1,7 +1,9 @@
 @import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-text');
 
 body {
-    font-family: 'Neue Haas Grotesk Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+    font-family: 'Neue Haas Grotesk Text', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol';
     background-color: #f0f1f3;
     color: #333;
     -webkit-font-smoothing: antialiased;
@@ -19,7 +21,7 @@ body {
     top: 0vh;
     justify-content: center;
     background-color: #333;
-    color: #EEE;
+    color: #eee;
     margin: 0px;
     z-index: 100;
 }
@@ -41,13 +43,24 @@ body {
     text-align: left;
 }
 
+.unselectable {
+    -webkit-user-select: none; /* Chrome, Safari, Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+.link {
+    cursor: pointer;
+}
+
 .bungie-name {
     font-size: 32px;
     font-weight: 700;
     display: flex;
     text-align: left;
     align-items: end;
-    color: #ADE; /* dark theme color #65CAFF*/
+    color: #ade; /* dark theme color #65CAFF*/
     margin-left: 2px;
     justify-content: center;
 }
@@ -112,6 +125,12 @@ body {
     .category {
         width: 100%;
     }
+    .title {
+        font-size: 24px;
+    }
+    .bungie-name {
+        font-size: 24px;
+    }
 }
 
 .category:hover {
@@ -168,7 +187,7 @@ body {
     font-weight: bold;
     font-size: xx-large;
 }
-  
+
 .commendation-name {
     font-size: 12px;
     text-align: center;
@@ -182,7 +201,6 @@ body {
     line-height: 1.2; /* Adjust line height for better readability */
     height: 2.4em; /* Add a fixed height to the name element */
 }
-
 
 .commendation-card-wrapper .commendation-name {
     display: flex;
